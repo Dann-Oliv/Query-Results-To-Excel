@@ -35,7 +35,7 @@ try:
         json_data = json.load(json_file)
         print("Arquivo JSON carregado !\n")
 
-except FileNotFoundError:    # Captura o erro de não econtrar o arquivo
+except FileNotFoundError:    # Captura o erro de não encontrar o arquivo
     raise SystemExit("Erro: Arquivo JSON não encontrado.")
 
 except json.JSONDecodeError: # Captura o erro de JSON inválido
@@ -53,7 +53,7 @@ try:
         query = query_file.read()
         print("Arquivo SQL carregado !\n")
 
-except FileNotFoundError:    # Captura o erro de não econtrar o arquivo
+except FileNotFoundError:    # Captura o erro de não encontrar o arquivo
     raise SystemExit("Erro: Arquivo não encontrado.")
 
 except PermissionError:      # Captura o erro de Permissão 
@@ -66,13 +66,13 @@ except Exception as e:       # Captura qualquer erro inesperado
 db_type = json_data['db_type'].lower() # Pega o tipo de banco de dados informado no JSON
 
 if (db_type == 'postgres'):
-    # Padrao da engine: postgresql+psycopg2://username:password@host:port/database
+    # Padrão da engine: postgresql+psycopg2://username:password@host:port/database
     driver = "postgresql+psycopg2"
 
     engine = create_engine(f"{driver}://{json_data['user']}:{json_data['password']}@{json_data['host']}:{json_data['port']}/{json_data['database']}")
 
 elif (db_type == 'mysql'):
-    # Padrao da engine: mysql+mysqldb://username:password@host:port/database
+    # Padrão da engine: mysql+mysqldb://username:password@host:port/database
     driver = "mysql+mysqldb"
 
     engine = create_engine(f"{driver}://{json_data['user']}:{json_data['password']}@{json_data['host']}:{json_data['port']}/{json_data['database']}")
@@ -110,8 +110,7 @@ if verify_conn() == True:
 
             # Coloca o resultado em uma planilha
             df.to_excel(os.path.join(pathExcel,f"{database}.xlsx"),index=False)
-            # df.to_excel(f"{pathExcel}/{database}.xlsx", index=False)
-
+          
             print(f"Planilha com os resultados gerada com sucesso !\n")
 
 
